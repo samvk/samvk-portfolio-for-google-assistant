@@ -1,0 +1,28 @@
+{
+  "name": "sam-kauffman",
+  "description": "Ok Google, talk to Sam's portfolio",
+  "author": "SamVK",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "tslint --project tsconfig.json",
+    "build": "tsc",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase experimental:functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "@types/actions-on-google": "^1.10.2",
+    "actions-on-google": "^2.0.0",
+    "firebase-admin": "^6.4.0",
+    "firebase-functions": "^2.1.0"
+  },
+  "devDependencies": {
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
+  },
+  "engines": {
+    "node": "8"
+  }
+}
