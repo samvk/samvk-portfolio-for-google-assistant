@@ -19,7 +19,7 @@ const app = dialogflow({ debug: true });
 app.intent('Default Welcome Intent', (conv) => {
     conv.ask(new SimpleResponse({
         speech: `<speak>
-            <s>Hi, I'm Sam.</s>
+            <s>Hi, my name's Sam.</s>
             <s>I'm a developer who enjoys problem solving, building apps, and bringing designs to life.</s>
             <s>On a personal note: I love metal detecting, watching movies, the theatre, and building things.</s>
             <s>What would you like to know more about?</s>
