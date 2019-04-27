@@ -2,20 +2,20 @@ import { dialogflow, SimpleResponse, BasicCard, Button, Image, Suggestions, Brow
 import * as functions from 'firebase-functions';
 import { randomPop } from './util';
 
-const app = dialogflow({ debug: true });
-
-/** **** CONSTANTS ***** */
-const CHIP = {
-    PROJECTS: '🎨 Projects',
-    SKILLS: '⭐ Skills',
-    CONTACT: '💬 Contact me',
-    GITHUB: ' ☁️ GitHub',
+/** **** SUGGESTION CHIPS ***** */
+enum Chip {
+    Projects = '🎨 Projects',
+    Skills = '⭐ Skills',
+    Contact = '💬 Contact me',
+    Github = ' ☁️ GitHub',
 }
 
 /** **** RESPONSES ***** */
 const whatElseResponse = () => randomPop(['Anything else?' ,'What else can I tell you about?', `Anything else you'd like to hear about?`, `What else would you like to hear about?`]);
 
 /** **** DIALOGFLOW ***** */
+const app = dialogflow({ debug: true });
+
 app.intent('Default Welcome Intent', (conv) => {
     conv.ask(new SimpleResponse({
         speech: `<speak>
@@ -49,15 +49,15 @@ Try asking me about some of my past projects. Or, you can hit "Learn more" to se
         display: 'WHITE',
     }));
 
-    conv.ask(new Suggestions([CHIP.PROJECTS, CHIP.SKILLS, CHIP.CONTACT]));
-    conv.ask(new LinkOutSuggestion({ name: CHIP.GITHUB, url: 'https://samvk.com/github' }));
+    conv.ask(new Suggestions([Chip.Projects, Chip.Skills, Chip.Contact]));
+    conv.ask(new LinkOutSuggestion({ name: Chip.Github, url: 'https://samvk.com/github' }));
 });
 
 app.intent('projects', (conv) => {
     if (!conv.surface.capabilities.has('actions.capability.SCREEN_OUTPUT')) {
         conv.ask(new SimpleResponse({
             speech: `<speak>
-                <s>My main project currently is <sub alias='Konica Minolta Marketplace.com'>https://konicaminoltamarketplace.com</sub>. You can also try talking to some of my other apps: try saying &quot;Okay Google, talk to Etymology Dictionary&quot;.</s>
+                <s>My main project currently is <sub alias='Konica Minolta Marketplace.com'>https://konicaminoltamarketplace.com</sub>. You can also try talking to some of my other apps: try leaving and then saying &quot;Okay Google, talk to Etymology Dictionary&quot;.</s>
                 <s>To view more of my past projects, visit <sub alias='Sam VK.com/projects'>https://samvk.com/projects</sub>.</s>
             </speak>`,
             text: `My main project currently is https://konicaminoltamarketplace.com. You can also try talking to some of my other apps: try saying “Okay Google, talk to Etymology Dictionary”.
@@ -103,8 +103,8 @@ To view more of my past projects, visit https://samvk.com/projects.`,
     }));
 
     conv.ask(whatElseResponse());
-    conv.ask(new Suggestions([CHIP.SKILLS, CHIP.CONTACT]));
-    conv.ask(new LinkOutSuggestion({ name: CHIP.GITHUB, url: 'https://samvk.com/github' }));
+    conv.ask(new Suggestions([Chip.Skills, Chip.Contact]));
+    conv.ask(new LinkOutSuggestion({ name: Chip.Github, url: 'https://samvk.com/github' }));
 
 });
 
@@ -125,8 +125,8 @@ app.intent(['contact - yes - fallback', 'contact - yes - custom'], (conv) => {
     conv.ask(`Alright, sending your message now.`);
     conv.ask(whatElseResponse());
 
-    conv.ask(new Suggestions([CHIP.PROJECTS, CHIP.SKILLS]));
-    conv.ask(new LinkOutSuggestion({ name: CHIP.GITHUB, url: 'https://samvk.com/github' }));
+    conv.ask(new Suggestions([Chip.Projects, Chip.Skills]));
+    conv.ask(new LinkOutSuggestion({ name: Chip.Github, url: 'https://samvk.com/github' }));
 
 });
 
@@ -141,8 +141,8 @@ If you'd like to get in touch later, you can reach me at https://samvk.com/conta
     }));
     conv.ask(whatElseResponse());
 
-    conv.ask(new Suggestions([CHIP.PROJECTS, CHIP.SKILLS]));
-    conv.ask(new LinkOutSuggestion({ name: CHIP.GITHUB, url: 'https://samvk.com/github' }));
+    conv.ask(new Suggestions([Chip.Projects, Chip.Skills]));
+    conv.ask(new LinkOutSuggestion({ name: Chip.Github, url: 'https://samvk.com/github' }));
 });
 
 
@@ -152,8 +152,8 @@ app.intent('github', (conv) => {
         text: `To view my GitHub profile and see all of my past projects, visit https://github.com/samvk.`
     }));
     conv.ask(whatElseResponse());
-    conv.ask(new Suggestions([CHIP.PROJECTS, CHIP.SKILLS, CHIP.CONTACT]));
-    conv.ask(new LinkOutSuggestion({ name: CHIP.GITHUB, url: 'https://samvk.com/github' }));
+    conv.ask(new Suggestions([Chip.Projects, Chip.Skills, Chip.Contact]));
+    conv.ask(new LinkOutSuggestion({ name: Chip.Github, url: 'https://samvk.com/github' }));
 });
 
 app.intent('skills', (conv) => {
@@ -166,8 +166,8 @@ app.intent('skills', (conv) => {
 Lately, I've also been playing around with TypeScript.`,
     }));
     conv.ask(whatElseResponse());
-    conv.ask(new Suggestions([CHIP.PROJECTS, CHIP.CONTACT]));
-    conv.ask(new LinkOutSuggestion({ name: CHIP.GITHUB, url: 'https://samvk.com/github' }));
+    conv.ask(new Suggestions([Chip.Projects, Chip.Contact]));
+    conv.ask(new LinkOutSuggestion({ name: Chip.Github, url: 'https://samvk.com/github' }));
 
 });
 
@@ -179,8 +179,8 @@ app.intent(['Default Fallback Intent', 'actions_intent_NO_INPUT'], (conv) => {
     conv.ask(randomPop([`I didn't catch that.`, `I don't understand what you've just said.`, `Sorry, I'm not sure how to help with that.`]));
     conv.ask(`You can try asking me about some of my past projects, ask me about my technical skills, or ask to contact me.`);
 
-    conv.ask(new Suggestions([CHIP.PROJECTS, CHIP.SKILLS, CHIP.CONTACT]));
-    conv.ask(new LinkOutSuggestion({ name: CHIP.GITHUB, url: 'https://samvk.com/github' }));
+    conv.ask(new Suggestions([Chip.Projects, Chip.Skills, Chip.Contact]));
+    conv.ask(new LinkOutSuggestion({ name: Chip.Github, url: 'https://samvk.com/github' }));
 
 });
 
