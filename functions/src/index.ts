@@ -37,8 +37,8 @@ app.intent('Default Welcome Intent', (conv) => {
         title: 'About me',
         subtitle: `Hi, I'm Sam`,
         text: `I'm a developer who enjoys problem solving, building apps, and bringing designs to life.
-On a personal note: I love metal detecting, watching movies, the theatre, and building things.
-Try asking me about some of my past projects. Or, you can hit "Learn more" to see my full portfolio.`,
+  \nOn a personal note: I love metal detecting, watching movies, the theatre, and building things.
+  \nTry asking me about some of my past projects. Or, you can hit "Learn more" to see my full portfolio.`,
         buttons: new Button({
             title: 'Learn more',
             url: 'https://samvk.com',
