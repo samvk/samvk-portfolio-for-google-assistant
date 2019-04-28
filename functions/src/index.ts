@@ -5,9 +5,10 @@ import { randomPop } from './util';
 /** **** SUGGESTION CHIPS ***** */
 enum Chip {
     Projects = '🎨 Projects',
-    Skills = '⭐ Skills',
+    Skills = '🌠 Skills',
     Contact = '💬 Contact me',
-    Github = ' ☁️ GitHub',
+    Github = '☁️ GitHub',
+    Goodbye = '👋 Goodbye.',
 }
 
 /** **** RESPONSES ***** */
@@ -125,7 +126,7 @@ app.intent(['contact - yes - fallback', 'contact - yes - custom'], (conv) => {
     conv.ask(`Alright, sending your message now.`);
     conv.ask(whatElseResponse());
 
-    conv.ask(new Suggestions([Chip.Projects, Chip.Skills]));
+    conv.ask(new Suggestions([Chip.Goodbye, Chip.Projects, Chip.Skills]));
     conv.ask(new LinkOutSuggestion({ name: Chip.Github, url: 'https://samvk.com/github' }));
 
 });
@@ -141,7 +142,7 @@ If you'd like to get in touch later, you can reach me at https://samvk.com/conta
     }));
     conv.ask(whatElseResponse());
 
-    conv.ask(new Suggestions([Chip.Projects, Chip.Skills]));
+    conv.ask(new Suggestions([Chip.Goodbye, Chip.Projects, Chip.Skills]));
     conv.ask(new LinkOutSuggestion({ name: Chip.Github, url: 'https://samvk.com/github' }));
 });
 
