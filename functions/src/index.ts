@@ -21,7 +21,7 @@ app.intent('Default Welcome Intent', (conv) => {
     conv.ask(new SimpleResponse({
         speech: `<speak>
             <s>Hi, my name's Sam.</s>
-            <s>I'm a developer who enjoys problem solving, building apps, and bringing designs to life.</s>
+            <s>I'm a software developer team lead at Konica Minolta who enjoys problem solving and bringing ideas to life.</s>
             <s>On a personal note: I love metal detecting, watching movies, the theatre, and building things.</s>
             <s>What would you like to know more about?</s>
             <s>To start: try asking me about some of my past projects. Or ask me about my technical skills.</s>
@@ -36,7 +36,7 @@ app.intent('Default Welcome Intent', (conv) => {
     conv.ask(new BasicCard({
         title: 'About me',
         subtitle: `Hi, I'm Sam`,
-        text: `I'm a developer who enjoys problem solving, building apps, and bringing designs to life.
+        text: `I'm a software developer team lead at Konica Minolta who enjoys problem solving and bringing ideas to life.
   \nOn a personal note: I love metal detecting, watching movies, the theatre, and building things.
   \nTry asking me about some of my past projects. Or, you can hit "Learn more" to see my full portfolio.`,
         buttons: new Button({
@@ -58,10 +58,10 @@ app.intent('projects', (conv) => {
     if (!conv.surface.capabilities.has('actions.capability.SCREEN_OUTPUT')) {
         conv.ask(new SimpleResponse({
             speech: `<speak>
-                <s>My main project currently is <sub alias='Konica Minolta Marketplace.com'>https://konicaminoltamarketplace.com</sub>. You can also try talking to some of my other apps: try leaving and then saying &quot;Okay Google, talk to Etymology Dictionary&quot;.</s>
+                <s>My main project currently is <sub alias='Shield Guard.com'>https://getshieldguard.com</sub>. You can also try talking to some of my other apps: try leaving and then saying &quot;Okay Google, talk to Etymology Dictionary&quot;.</s>
                 <s>To view more of my past projects, visit <sub alias='Sam VK.com/projects'>https://samvk.com/projects</sub>.</s>
             </speak>`,
-            text: `My main project currently is https://konicaminoltamarketplace.com. You can also try talking to some of my other apps: try saying “Okay Google, talk to Etymology Dictionary”.
+            text: `My main project currently is https://getshieldguard.com. You can also try talking to some of my other apps: try saying “Okay Google, talk to Etymology Dictionary”.
 To view more of my past projects, visit https://samvk.com/projects.`,
         }));
         conv.ask(whatElseResponse());
@@ -72,6 +72,24 @@ To view more of my past projects, visit https://samvk.com/projects.`,
 
     conv.ask(new BrowseCarousel({
         items: [
+            new BrowseCarouselItem({
+                title: 'Shield Guard',
+                description: 'Service to enable admins to monitor their MFP fleet security and manage device passwords using the web crypto API',
+                url: 'https://getshieldguard.com',
+                image: new Image({
+                    url: 'https://samvk.com/image/shield-guard-logo.png',
+                    alt: 'Shield Guard',
+                }),
+            }),
+            new BrowseCarouselItem({
+                title: 'Konica Minolta Personalize',
+                description: 'Service to enable users to customize their MFP panel from the web – written in TypeScript using React & Redux with Material UI and Tailwind',
+                url: 'https://getpersonalize.com',
+                image: new Image({
+                    url: 'https://samvk.com/image/personalize-logo.png',
+                    alt: 'Konica Minolta Personalize',
+                }),
+            }),
             new BrowseCarouselItem({
                 title: 'Konica Minolta MarketPlace',
                 description: 'Global app store rebuilt from scratch using React & Redux and PostCSS – with a back-end in PHP and Node.js serverless microservices on AWS',
@@ -160,11 +178,9 @@ app.intent('github', (conv) => {
 app.intent('skills', (conv) => {
     conv.close(new SimpleResponse({
         speech: `<speak>
-            <s>My go-to technologies right now include HTML5, CSS3, and JavaScript (<sub alias='E-S Next'>ESNext</sub>) — amped with the help of React &amp; <sub alias='Reducks'>Redux</sub> and PostCSS &amp; Sass — built with the help of Webpack and Babel. I also have experience with <sub alias='Node-JS'>Node.js</sub>, PHP, and SQL.</s>
-            <s>Lately, I&apos;ve also been playing around with TypeScript.</s>
+            <s>My go-to technologies right now include HTML5, CSS3, JavaScript (<sub alias='E-S Next'>ESNext</sub>), and TypeScript — amped with the help of React &amp; <sub alias='Reducks'>Redux</sub> and PostCSS &amp; Sass — built with the help of Webpack and Babel. I also work with <sub alias='Node-JS'>Node.js</sub>, PHP, and SQL.</s>
         </speak>`,
-        text: `My go-to technologies right now include HTML5, CSS3, and JavaScript(ESNext) — amped with the help of React & Redux and PostCSS & Sass — built with the help of Webpack and Babel. I also have experience with Node.js, PHP, and SQL.
-Lately, I've also been playing around with TypeScript.`,
+        text: `My go-to technologies right now include HTML5, CSS3, JavaScript(ESNext), and TypeScript — amped with the help of React & Redux and PostCSS & Sass — built with the help of Webpack and Babel. I also work with Node.js, PHP, and SQL.`,
     }));
     conv.ask(whatElseResponse());
     conv.ask(new Suggestions([Chip.Projects, Chip.Contact]));
